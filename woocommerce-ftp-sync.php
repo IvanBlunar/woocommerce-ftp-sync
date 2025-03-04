@@ -106,6 +106,9 @@ class WooCommerce_FTP_Sync {
             // Aplicar clase de impuesto "Reduced Rate" si el valor de tax es mayor a 0
             $tax_class = isset($data['tax']) && intval($data['tax']) > 0 ? 'reduced-rate' : '';
 
+            // Obtener peso del producto
+            $weight = isset($data['weight']) ? floatval($data['weight']) : 0;
+
             if (!$sku) {
                 continue;
             }
@@ -118,6 +121,7 @@ class WooCommerce_FTP_Sync {
                 update_post_meta($product_id, '_sale_price', $sale_price);
                 update_post_meta($product_id, '_stock', $stock);
                 update_post_meta($product_id, '_tax_class', $tax_class);
+                update_post_meta($product_id, '_weight', $weight); // Actualizar peso del producto
             }
         }
 
